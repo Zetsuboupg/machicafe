@@ -1,0 +1,14 @@
+<h1>Edit Like</h1>
+<%= form_with(model: @like, local: true) do |form| %>
+  <div>
+    <%= form.label :review_id %>
+    <%= form.number_field :review_id %>
+  </div>
+  <div>
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+  <div>
+    <%= form.submit "Update Like" %>
+  </div>
+<% end %>

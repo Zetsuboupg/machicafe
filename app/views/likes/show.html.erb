@@ -1,0 +1,9 @@
+<h1>Show Like</h1>
+<p>
+  Review ID: <%= @like.review_id %>
+</p>
+<p>
+  User ID: <%= @like.user_id %>
+</p>
+<%= link_to 'Edit', edit_like_path(@like) %>
+<%= link_to 'Back', likes_path %>

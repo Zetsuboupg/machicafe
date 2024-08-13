@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  cafe_id: 1
+  comfort_rating: 1.5
+  talk_rating: 1.5
+  ambiance_rating: 1.5
+  comment: MyText
+  created_at: 2024-08-06 09:08:18
+
+two:
+  user_id: 1
+  cafe_id: 1
+  comfort_rating: 1.5
+  talk_rating: 1.5
+  ambiance_rating: 1.5
+  comment: MyText
+  created_at: 2024-08-06 09:08:18

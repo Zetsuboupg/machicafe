@@ -1,0 +1,30 @@
+<h1>Edit Review</h1>
+<%= form_with(model: @review, local: true) do |form| %>
+  <div>
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+  <div>
+    <%= form.label :cafe_id %>
+    <%= form.number_field :cafe_id %>
+  </div>
+  <div>
+    <%= form.label :comfort_rating %>
+    <%= form.number_field :comfort_rating %>
+  </div>
+  <div>
+    <%= form.label :talk_rating %>
+    <%= form.number_field :talk_rating %>
+  </div>
+  <div>
+    <%= form.label :ambiance_rating %>
+    <%= form.number_field :ambiance_rating %>
+  </div>
+  <div>
+    <%= form.label :comment %>
+    <%= form.text_area :comment %>
+  </div>
+  <div>
+    <%= form.submit "Update Review" %>
+  </div>
+<% end %>

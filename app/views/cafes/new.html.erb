@@ -1,0 +1,22 @@
+<h1>New Cafe</h1>
+<%= form_with(model: @cafe, local: true) do |form| %>
+  <div>
+    <%= form.label :cafe_name %>
+    <%= form.text_field :cafe_name %>
+  </div>
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  <div>
+    <%= form.label :category_id %>
+    <%= form.number_field :category_id %>
+  </div>
+  <div>
+    <%= form.submit "Create Cafe" %>
+  </div>
+<% end %>

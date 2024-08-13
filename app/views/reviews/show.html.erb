@@ -1,0 +1,21 @@
+<h1>Show Review</h1>
+<p>
+  User ID: <%= @review.user_id %>
+</p>
+<p>
+  Cafe ID: <%= @review.cafe_id %>
+</p>
+<p>
+  Comfort Rating: <%= @review.comfort_rating %>
+</p>
+<p>
+  Talk Rating: <%= @review.talk_rating %>
+</p>
+<p>
+  Ambiance Rating: <%= @review.ambiance_rating %>
+</p>
+<p>
+  Comment: <%= @review.comment %>
+</p>
+<%= link_to 'Edit', edit_review_path(@review) %>
+<%= link_to 'Back', reviews_path %>

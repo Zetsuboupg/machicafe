@@ -1,0 +1,10 @@
+<h1>All Reviews</h1>
+<ul>
+  <% @reviews.each do |review| %>
+    <li>
+      <%= link_to "Review ##{review.id}", review_path(review) %>
+      - User ID: <%= review.user_id %>
+      - Cafe ID: <%= review.cafe_id %>
+    </li>
+  <% end %>
+</ul>
