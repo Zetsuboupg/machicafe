@@ -6,3 +6,15 @@
     </li>
   <% end %>
 </ul>
+
+<!-- app/views/cafes/index.html.erb -->
+<h2>お店一覧</h2>
+<ul>
+  <% @cafes.each do |cafe| %>
+    <li>
+      <strong><%= cafe.name %></strong><br>
+      <%= cafe.description %><br>
+      <%= cafe.address %>
+    </li>
+  <% end %>
+</ul>

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 devise_for :users
 root to: 'homes#about'
 get 'about', to: 'homes#about'
-
+get 'top', to: 'homes#top'
 
 resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 resources :cafes, only: [:new, :create, :index, :show, :edit, :update, :destroy]

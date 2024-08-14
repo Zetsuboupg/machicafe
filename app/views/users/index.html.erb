@@ -16,3 +16,24 @@
     <%= form.submit "Create User" %>
   </div>
 <% end %>
+
+<div class="container">
+  <div class="header">
+    <%= link_to "マチカフェ", root_path, class: "brand-logo" %>
+    <div class="nav-links">
+      <%= link_to "ホーム", root_path %>
+      <%= link_to "マイページ", user_path(current_user) %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    </div>
+  </div>
+  <div class="content">
+    <div class="left-column">
+      <h2>架空のお店一覧</h2>
+      <!-- 架空のお店リストをここに追加 -->
+    </div>
+    <div class="right-column">
+      <h2>ランキング一覧</h2>
+      <!-- ランキングリストをここに追加 -->
+    </div>
+  </div>
+</div>
