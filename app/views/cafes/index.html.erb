@@ -1,13 +1,21 @@
 <h1>All Cafes</h1>
+
+<%= search_form_for @q, url: cafes_path, method: :get do |f| %>
+  <div>
+    <%= f.label :name_cont, "名前で検索" %>
+    <%= f.search_field :name_cont %>
+    <%= f.submit "検索" %>
+  </div>
+<% end %>
+
 <ul>
   <% @cafes.each do |cafe| %>
     <li>
-      <%= link_to cafe.cafe_name, cafe_path(cafe) %>
+      <%= link_to cafe.name, cafe_path(cafe) %>
     </li>
   <% end %>
 </ul>
 
-<!-- app/views/cafes/index.html.erb -->
 <h2>お店一覧</h2>
 <ul>
   <% @cafes.each do |cafe| %>
@@ -18,3 +26,5 @@
     </li>
   <% end %>
 </ul>
+
+<%= link_to 'Create New Cafe', new_cafe_path %>

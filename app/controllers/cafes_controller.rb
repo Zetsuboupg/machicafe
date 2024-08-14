@@ -5,7 +5,8 @@ class CafesController < ApplicationController
   end
 
   def index
-    @cafes = Cafe.all
+    @q = Cafe.ransack(params[:q])
+    @cafes = @q.result
   end
 
   def show
@@ -16,9 +17,27 @@ class CafesController < ApplicationController
     @cafe = Cafe.find(params[:id])
   end
 
-  private
-  def list_params
-    params.require(:list).permit(:title, :body, :image)
+  def create
+    @cafe = Cafe.new(cafe_params)
+    if @cafe.save
+      redirect_to @cafe
+    else
+      render :new
+    end
   end
 
+  def update
+    @cafe = Cafe.find(params[:id])
+    if @cafe.update(cafe_params)
+      redirect_to @cafe
+    else
+      render :edit
+    end
+  end
+
+  private
+
+  def cafe_params
+    params.require(:cafe).permit(:cafe_name, :address, :description, :category_id, :image)
+  end
 end

@@ -11,5 +11,10 @@
 <p>
   Category ID: <%= @cafe.category_id %>
 </p>
+<p>
+  <%= image_tag @cafe.image if @cafe.image.attached? %>
+</p>
+
 <%= link_to 'Edit', edit_cafe_path(@cafe) %>
 <%= link_to 'Back', cafes_path %>
+<%= link_to 'Upload a New Photo', edit_cafe_path(@cafe) %>

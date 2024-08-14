@@ -1,6 +1,3 @@
-<h1>Edit Cafe</h1>
-
-<%= form_with(model: @cafe, local: true) do |form| %>
 
   <div>
     <%= form.label :cafe_name %>
@@ -21,9 +18,5 @@
   <div>
     <%= form.label :image, "カフェの写真" %>
     <%= form.file_field :image %>
-  </div>
-
-  <div>
-    <%= form.submit "Update Cafe" %>
   </div>
 <% end %>
