@@ -5,4 +5,6 @@ class Cafe < ApplicationRecord
     ["address", "name", "description"]
   end
 
+  has_many :reviews, dependent: :destroy
+
 end

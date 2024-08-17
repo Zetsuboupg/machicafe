@@ -1,30 +1,32 @@
+<!-- マチカフェタイトル -->
+<div class="container">
+  <div class="header">
+    <%= link_to "マチカフェ", top_path, class: "brand-logo" %>
+  </div>
+
 <h1>All Cafes</h1>
 
-<%= search_form_for @q, url: cafes_path, method: :get do |f| %>
+<%= form_with url: cafes_path, method: :get, local: true do %>
   <div>
-    <%= f.label :name_cont, "名前で検索" %>
-    <%= f.search_field :name_cont %>
-    <%= f.submit "検索" %>
+    <label for="q_name_cont">名前で検索</label>
+    <%= text_field_tag 'q[name_cont]', params.dig(:q, :name_cont), id: 'q_name_cont' %>
+  </div>
+  <div>
+    <%= submit_tag "検索" %>
   </div>
 <% end %>
-
-<ul>
-  <% @cafes.each do |cafe| %>
-    <li>
-      <%= link_to cafe.name, cafe_path(cafe) %>
-    </li>
-  <% end %>
-</ul>
 
 <h2>お店一覧</h2>
 <ul>
   <% @cafes.each do |cafe| %>
     <li>
-      <strong><%= cafe.name %></strong><br>
+      <strong><%= link_to cafe.name, cafe_path(cafe) %></strong><br>
       <%= cafe.description %><br>
       <%= cafe.address %>
     </li>
   <% end %>
 </ul>
 
+
+</ul>
 <%= link_to 'Create New Cafe', new_cafe_path %>

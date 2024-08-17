@@ -9,11 +9,14 @@ get 'top', to: 'homes#top'
 
 
 resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-resources :cafes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+resources :cafes do
+  resources :reviews do
+    resources :comments, only: [:create]
+  end
+end
 resources :categories, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-resources :reviwes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 resources :likes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-resources :comments, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 resources :administrators, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+
 
 end

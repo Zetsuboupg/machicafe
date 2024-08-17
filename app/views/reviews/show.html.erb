@@ -19,3 +19,19 @@
 </p>
 <%= link_to 'Edit', edit_review_path(@review) %>
 <%= link_to 'Back', reviews_path %>
+
+<h3>コメントを追加</h3>
+<%= form_with(model: [ @review, @review.comments.build ], local: true) do |f| %>
+  <div>
+    <%= f.label :content, "コメント" %>
+    <%= f.text_area :content %>
+  </div>
+  <div>
+    <%= f.submit "コメントを投稿" %>
+  </div>
+<% end %>
+
+<h3>コメント一覧</h3>
+<% @review.comments.each do |comment| %>
+  <p><strong><%= comment.user.email %>:</strong> <%= comment.content %></p>
+<% end %>

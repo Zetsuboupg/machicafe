@@ -18,3 +18,48 @@
 <%= link_to 'Edit', edit_cafe_path(@cafe) %>
 <%= link_to 'Back', cafes_path %>
 <%= link_to 'Upload a New Photo', edit_cafe_path(@cafe) %>
+
+
+
+
+<!-- app/views/cafes/show.html.erb -->
+<h1><%= @cafe.cafe_name %></h1>
+<p><%= @cafe.description %></p>
+
+<h2>レビュー一覧</h2>
+<% @cafe.reviews.each do |review| %>
+  <p><strong>User Name: <%= review.user.name %></strong></p>
+  <p>総合評価: <%= review.rating %></p>
+  <p><%= review.comment %></p>
+
+  <!-- コメント一覧 -->
+
+
+  <!-- コメントフォーム -->
+  <%= form_with(model: [review, review.comments.build], url: cafe_review_comments_path(@cafe, review), local: true) do |f| %>
+    <div>
+      <%= f.label :content, "コメント" %>
+      <%= f.text_area :content %>
+    </div>
+    <div>
+      <%= f.submit "コメントを投稿" %>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+<h2>新しいレビューを書く</h2>
+<%= form_with(model: [ @cafe, @cafe.reviews.build ], local: true) do |f| %>
+  <div>
+    <%= f.label :rating, "評価 (1-5)" %>
+    <%= f.number_field :rating, in: 1..5 %>
+  </div>
+  <div>
+    <%= f.label :comment, "レビュー内容" %>
+    <%= f.text_area :comment %>
+  </div>
+  <div>
+    <%= f.submit "レビューを投稿" %>
+  </div>
+<% end %>

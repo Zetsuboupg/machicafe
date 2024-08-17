@@ -1,35 +1,32 @@
 <div class="container">
   <div class="header">
-    <%= link_to "マチカフェ", root_path, class: "brand-logo" %>
+    <%= link_to "マチカフェ", top_path, class: "brand-logo" %>
   </div>
+
   <div class="content">
     <div class="left-column">
-      <h2>架空のお店一覧</h2>
+      <%= form_with url: cafes_path, method: :get, local: true do %>
+        <div>
+          <label for="q_name_cont">名前で検索</label>
+          <%= text_field_tag 'q[name_cont]', params.dig(:q, :name_cont), id: 'q_name_cont' %>
+        </div>
+        <div>
+          <%= submit_tag "検索" %>
+        </div>
+      <% end %>
+
+      <h2>お店一覧</h2>
       <ul>
         <% @cafes.each do |cafe| %>
           <li>
-            <strong><%= cafe.name %></strong><br>
+            <strong><%= link_to cafe.name, cafe_path(cafe) %></strong><br>
             <%= cafe.description %><br>
             <%= cafe.address %>
           </li>
         <% end %>
       </ul>
-    </div>
-    <div class="right-column">
-      <h2>ランキング一覧</h2>
-      <!-- ランキングリストをここに追加 -->
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="header">
-    <%= link_to "マチカフェ", root_path, class: "brand-logo" %>
-  </div>
-  <div class="content">
-    <div class="left-column">
-      <h2>架空のお店一覧</h2>
       <%= link_to "お店一覧を見る", cafes_path, class: "btn btn-primary" %>
+
     </div>
     <div class="right-column">
       <h2>ランキング一覧</h2>
