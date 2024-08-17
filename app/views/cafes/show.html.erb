@@ -32,14 +32,19 @@
   <p>総合評価: <%= review.rating %></p>
   <p><%= review.comment %></p>
 
+  <h3>コメント一覧</h3>
+  <% review.comments.each do |comment| %>
+    <div>
+      <p><strong><%= comment.user.name %>:</strong> <%= comment.comment_content %></p>
+  <% end %>
   <!-- コメント一覧 -->
 
 
   <!-- コメントフォーム -->
   <%= form_with(model: [review, review.comments.build], url: cafe_review_comments_path(@cafe, review), local: true) do |f| %>
     <div>
-      <%= f.label :content, "コメント" %>
-      <%= f.text_area :content %>
+      <%= f.label :comment_content, "コメント" %>
+      <%= f.text_area :comment_content %>
     </div>
     <div>
       <%= f.submit "コメントを投稿" %>
