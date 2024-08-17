@@ -16,7 +16,5 @@ resources :cafes do
 end
 resources :categories, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 resources :likes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-resources :administrators, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-
 
 end
