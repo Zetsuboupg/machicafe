@@ -1,5 +1,5 @@
 # app/controllers/reviews_controller.rb
-class ReviewsController < ApplicationController
+class Public::ReviewsController < ApplicationController
   def new
     @review = Review.new
   end

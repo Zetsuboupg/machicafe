@@ -1,5 +1,5 @@
 # app/controllers/cafes_controller.rb
-class CafesController < ApplicationController
+class Public::CafesController < ApplicationController
   def new
     @cafe = Cafe.new
   end

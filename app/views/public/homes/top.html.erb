@@ -3,6 +3,13 @@
     <%= link_to "マチカフェ", top_path, class: "brand-logo" %>
   </div>
 
+<% if current_user && current_user.admin? %>
+  <h1>ユーザー管理</h1>
+  <%= link_to '管理者専用リンク', system_admin_users_path, class: 'btn btn-primary' %>
+<% end %>
+
+
+
   <div class="content">
     <div class="left-column">
       <%= form_with url: cafes_path, method: :get, local: true do %>

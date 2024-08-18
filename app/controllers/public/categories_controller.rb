@@ -1,5 +1,5 @@
 # app/controllers/categories_controller.rb
-class CategoriesController < ApplicationController
+class Public::CategoriesController < ApplicationController
   def new
     @category = Category.new
   end

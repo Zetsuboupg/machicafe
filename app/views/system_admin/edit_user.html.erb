@@ -1,0 +1,20 @@
+<h1>ユーザー編集</h1>
+
+<%= form_with(model: @user, url: system_admin_user_path(@user)) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :admin %>
+    <%= f.check_box :admin %>
+  </div>
+
+  <%= f.submit "更新する" %>
+<% end %>

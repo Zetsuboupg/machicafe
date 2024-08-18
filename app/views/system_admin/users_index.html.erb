@@ -1,0 +1,27 @@
+<h1>ユーザー管理</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin? %></td>
+        <td>
+          <%= link_to '編集', system_admin_edit_user_path(user) %> |
+          <%= link_to '削除', system_admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

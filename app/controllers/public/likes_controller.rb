@@ -1,5 +1,5 @@
 # app/controllers/likes_controller.rb
-class LikesController < ApplicationController
+class Public::LikesController < ApplicationController
   def new
     @like = Like.new
   end
