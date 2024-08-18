@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   # Publicユーザー用ルーティング
   scope module: :public do
-    devise_for :users
+    devise_for :users, controllers: {
+      registrations: 'public/registrations'
+    }
     root to: 'homes#about'
     get 'about', to: 'homes#about'
     get 'top', to: 'homes#top'
