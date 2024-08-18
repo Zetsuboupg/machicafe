@@ -1,10 +1,20 @@
-<h1>All Reviews</h1>
+<h1>すべてのレビュー</h1>
+
 <ul>
   <% @reviews.each do |review| %>
     <li>
-      <%= link_to "Review ##{review.id}", review_path(review) %>
-      - User ID: <%= review.user_id %>
-      - Cafe ID: <%= review.cafe_id %>
+      <strong>カフェ: <%= link_to review.cafe.name, cafe_path(review.cafe) %></strong><br>
+      <strong>レビューを書いたユーザー: <%= link_to review.user.name, user_path(review.user) %></strong><br>
+      <p>評価: <%= review.rating %></p>
+      <p>コメント: <%= review.comment %></p>
+      <p>投稿日: <%= l(review.created_at, format: :short) %></p>
+
+      <!-- コメント一覧を表示 -->
+      <ul>
+        <% review.comments.each do |comment| %>
+          <li><%= comment.content %> - <%= comment.user.name %></li>
+        <% end %>
+      </ul>
     </li>
   <% end %>
 </ul>

@@ -12,7 +12,7 @@ gem 'puma', '~> 3.11'
 
 gem 'ransack'
 gem 'devise'
-gem 'rails_admin'
+# gem 'rails_admin'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'

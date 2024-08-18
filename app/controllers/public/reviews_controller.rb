@@ -5,7 +5,8 @@ class Public::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.all
+    #@reviews = Review.all
+    @reviews = Review.order(created_at: :desc).limit(10)
   end
 
   def show
