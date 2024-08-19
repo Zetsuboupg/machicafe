@@ -11,6 +11,7 @@ class Public::CafesController < ApplicationController
 
   def show
     @cafe = Cafe.find(params[:id])
+    @review = Review.new
   end
 
   def edit

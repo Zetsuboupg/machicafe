@@ -1,14 +1,20 @@
 class Admin::CafesController < ApplicationController
-  before_action :set_cafe, only: [:edit, :update, :destroy]
+  before_action :set_cafe, only: [:show, :edit, :update, :destroy]
+
+  def show; end
 
   def edit
     # @cafeはbefore_actionで設定
   end
 
+  def new
+    @cafe = Cafe.new
+  end
+
   def create
     @cafe = Cafe.new(cafe_params)
     if @cafe.save
-      redirect_to admin_cafes_path, notice: 'カフェ情報が更新されました'
+      redirect_to admin_dashboards_path, notice: 'カフェ情報が更新されました'
     else
       render :edit
     end
@@ -19,7 +25,7 @@ class Admin::CafesController < ApplicationController
   def update
     @cafe = Cafe.find(params[:id])
     if @cafe.update(cafe_params)
-      redirect_to admin_cafes_path, notice: 'カフェ情報が更新されました'
+      redirect_to admin_dashboards_path, notice: 'カフェ情報が更新されました'
     else
       render :edit
     end
@@ -39,6 +45,6 @@ class Admin::CafesController < ApplicationController
   end
 
   def cafe_params
-    params.require(:cafe).permit(:cafe_name, :cafe_description, :cafe_address, :image, :other_attributes)
+    params.require(:cafe).permit(:name, :description, :address, :image, :other_attributes)
   end
 end

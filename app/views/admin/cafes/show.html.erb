@@ -15,7 +15,7 @@
   <%= image_tag @cafe.image if @cafe.image.attached? %>
 </p>
 
-<%= link_to "戻る", cafes_path %>
+<%= link_to "戻る", admin_dashboards_path %>
 <!-- <= link_to 'Upload a New Photo', edit_cafe_path(@cafe) %> -->
 
 <h2>評価平均</h2>
@@ -50,7 +50,9 @@
   <p>User Name: <%= link_to review.user.name, user_path(review.user) %></p>
   <p>総合評価: <spsn id="cafe_rating_review_<%= review.id %>"></spsn></p>
   <p>レビュー内容: <%= review.comment %></p>
-
+  <p>
+    <%= link_to '削除', admin_review_path(review), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+  </p>
   <script>
     $(document).on('turbolinks:load', function() {
       let elem = document.querySelector('#cafe_rating_review_<%= review.id %>');
@@ -74,49 +76,4 @@
       <p><strong><%= comment.user.name %>:</strong> <%= comment.comment_content %></p>
   <% end %>
   <!-- コメント一覧 -->
-
-
-  <!-- コメントフォーム -->
-  <%= form_with(model: [review, review.comments.build], url: cafe_review_comments_path(@cafe, review), local: true) do |f| %>
-    <div>
-      <%= f.label :comment_content, "コメント" %>
-      <%= f.text_area :comment_content %>
-    </div>
-    <div>
-      <%= f.submit "コメントを投稿" %>
-    </div>
-  <% end %>
 <% end %>
-
-
-
-<h2>新しいレビューを書く</h2>
-<%= form_with(model: [ @cafe, @cafe.reviews.build ], local: true) do |f| %>
-  <div>
-    <%= f.label :rating, "評価 (1-5)" %>
-    <div id="cafe_rating"></div>
-  </div>
-  <div>
-    <%= f.label :comment, "レビュー内容" %>
-    <%= f.text_area :comment %>
-  </div>
-  <div>
-    <%= f.submit "レビューを投稿" %>
-  </div>
-<% end %>
-
-<script>
-  $(document).on('turbolinks:load', function() {
-    let elem = document.querySelector('#cafe_rating');
-    if (elem == null) return;
-
-    elem.innerHTML = ""
-    let opt = {
-      starOn: "<%= asset_path('star-on.png') %>",
-      starOff: "<%= asset_path('star-off.png') %>",
-      starHalf: "<%= asset_path('star-half.png') %>",
-      scoreName: 'review[rating]',
-    };
-    raty(elem, opt);
-  });
-</script>

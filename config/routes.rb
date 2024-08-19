@@ -8,14 +8,14 @@ Rails.application.routes.draw do
     get 'about', to: 'homes#about'
     get 'top', to: 'homes#top'
 
-    resources :users, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-    resources :cafes do
+    resources :users
+    resources :cafes, only: [:index, :show] do
       resources :reviews, only: [:index, :new, :create, :show] do
         resources :comments, only: [:create]
       end
     end
-    resources :categories, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-    resources :likes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :categories
+    resources :likes
   end
 
   # Adminユーザー用ルーティング
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:index, :show, :destroy]
-    resources :cafes, only: [:index, :edit, :create, :update, :destroy]# 全部(CRUD)
+    resources :cafes
     resources :reviews, only: [:destroy]
     #   resources :reviews, only: [:show, :destroy] do
     #     resources :comments, only: [:destroy]
