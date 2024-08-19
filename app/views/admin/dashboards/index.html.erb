@@ -2,9 +2,41 @@
 <ul>
   <% @users.each do |user| %>
     <li>
-      <%= user.name %> - <%= user.email %>
+      <%= link_to user.name, admin_user_path(user) %> - <%= user.email %>
       <!-- リンクを追加 -->
       <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } %>
     </li>
   <% end %>
+</ul>
+
+<h1>全カフェ一覧</h1>
+<ul>
+  <% @cafes.each do |cafe| %>
+    <li>
+      <strong><%= link_to cafe.name, cafe_path(cafe) %></strong><br>
+      <%= cafe.description %><br>
+      <%= cafe.address %>
+      <p>
+        <%= link_to '編集', edit_admin_cafe_path(cafe) %> |
+        <%= link_to '削除', admin_cafe_path(cafe), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+      </p>
+    </li>
+  <% end %>
+  </ul>
+  <%= link_to 'Create New Cafe', new_cafe_path %>
+
+</ul>
+
+<h1>全レビュー一覧</h1>
+<ul>
+  <% @reviews.each do |review| %>
+      <strong><%= link_to review.cafe.name, cafe_path(review.cafe) %></strong><br>
+      <p><strong>User Name: <%= review.user.name %></strong></p>
+      <p>評価: <%= review.rating %></p>
+      <p>コメント: <%= review.comment %></p>
+      <p>
+        <%= link_to '削除', admin_review_path(review), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+      </p>
+  <% end %>
+
 </ul>

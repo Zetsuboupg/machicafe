@@ -3,5 +3,7 @@ class Admin::DashboardsController < ApplicationController
     before_action :authenticate_admin!
     def index
         @users = User.all
+        @cafes = Cafe.all
+        @reviews = Review.all
     end
 end

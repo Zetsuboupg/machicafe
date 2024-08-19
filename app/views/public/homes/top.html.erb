@@ -30,7 +30,14 @@
     </div>
     <div class="right-column">
       <h1>新着レビュー</h1>
+      <ul>
+        <% @reviews.each do |review| %>
+            <strong><%= link_to review.cafe.name, cafe_path(review.cafe) %></strong><br>
+            <p><strong>User Name: <%= review.user.name %></strong></p>
+            <p>評価: <%= review.rating %></p>
+            <p>コメント: <%= review.comment %></p>
 
+        <% end %>
 
       <!-- ランキングリストをここに追加 -->
     </div>

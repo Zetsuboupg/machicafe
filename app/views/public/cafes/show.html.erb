@@ -1,6 +1,6 @@
 <h1>Show Cafe</h1>
 <p>
-  Name: <%= @cafe.cafe_name %>
+  Name: <%= @cafe.name %>
 </p>
 <p>
   Address: <%= @cafe.address %>
@@ -15,9 +15,8 @@
   <%= image_tag @cafe.image if @cafe.image.attached? %>
 </p>
 
-<%= link_to 'Edit', edit_cafe_path(@cafe) %>
-<%= link_to 'Back', cafes_path %>
-<%= link_to 'Upload a New Photo', edit_cafe_path(@cafe) %>
+<%= link_to "戻る", cafes_path %>
+<!-- <= link_to 'Upload a New Photo', edit_cafe_path(@cafe) %> -->
 
 
 
@@ -26,11 +25,13 @@
 <h1><%= @cafe.cafe_name %></h1>
 <p><%= @cafe.description %></p>
 
+
+
 <h2>レビュー一覧</h2>
 <% @cafe.reviews.each do |review| %>
-  <p><strong>User Name: <%= review.user.name %></strong></p>
+  <p>User Name: <%= link_to review.user.name, user_path(review.user) %></p>
   <p>総合評価: <%= review.rating %></p>
-  <p><%= review.comment %></p>
+  <p>レビュー内容: <%= review.comment %></p>
 
   <h3>コメント一覧</h3>
   <% review.comments.each do |comment| %>

@@ -25,8 +25,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
-    resources :users, only: [:index, :destroy]
-    # resources :cafes do # 全部(CRUD)
+    resources :users, only: [:index, :show, :destroy]
+    resources :cafes, only: [:index, :edit, :create, :update, :destroy]# 全部(CRUD)
+    resources :reviews, only: [:destroy]
     #   resources :reviews, only: [:show, :destroy] do
     #     resources :comments, only: [:destroy]
     #   end

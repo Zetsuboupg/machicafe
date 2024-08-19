@@ -1,7 +1,6 @@
-<h1>Edit Cafe</h1>
+<h1>カフェ編集</h1>
 
-<%= form_with(model: @cafe, local: true) do |form| %>
-
+<%= form_with model: @cafe, url: admin_cafe_path(@cafe), method: :patch, local: true do |form| %>
   <div>
     <%= form.label :cafe_name %>
     <%= form.text_field :cafe_name %>
@@ -22,9 +21,7 @@
     <%= form.label :image, "カフェの写真" %>
     <%= form.file_field :image %>
   </div>
-
   <div>
-    <%= form.submit "Update Cafe" %>
+    <%= form.submit '更新' %> <!-- 更新ボタン -->
   </div>
 <% end %>
-

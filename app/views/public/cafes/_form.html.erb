@@ -1,4 +1,4 @@
-
+<%= form_with model: @cafe, local: true do |form| %>
   <div>
     <%= form.label :cafe_name %>
     <%= form.text_field :cafe_name %>
@@ -18,5 +18,8 @@
   <div>
     <%= form.label :image, "カフェの写真" %>
     <%= form.file_field :image %>
+  </div>
+  <div>
+    <%= form.submit '送信' %> <!-- 提出ボタンも追加することをお勧めします -->
   </div>
 <% end %>
