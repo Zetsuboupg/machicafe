@@ -1,9 +1,14 @@
-<h1>Show User</h1>
-<p>
-  Username: <%= @user.username %>
-</p>
-<p>
-  Email: <%= @user.email %>
-</p>
-<%= link_to 'Edit', edit_user_path(@user) %>
-<%= link_to 'Back', users_path %>
+<div class="container">
+  <div class="header">
+    <%= link_to "マチカフェ", top_path, class: "brand-logo" %>
+  </div>
+
+  <h1>ユーザー詳細</h1>
+  <p>
+    Username: <%= @user.username %>
+  </p>
+  <p>
+    Email: <%= @user.email %>
+  </p>
+  <%= link_to '戻る', 'javascript:history.back()', class: "brand-logo" %>
+</div>

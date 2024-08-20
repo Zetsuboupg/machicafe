@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_admin, only: [:index, :edit, :update, :destroy]
+  before_action :check_admin, only: [:index, :update, :destroy]
 
   def new
     @user = User.new
