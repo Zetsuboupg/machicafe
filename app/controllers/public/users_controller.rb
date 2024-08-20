@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin, only: [:index, :update, :destroy]
+  before_action :ensure_guest_user, only: [:edit]
 
   def new
     @user = User.new
@@ -42,4 +43,12 @@ class Public::UsersController < ApplicationController
   def check_admin
     redirect_to(root_path, alert: "管理者権限が必要です。") unless current_user.admin?
   end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.email == "guest@example.com"
+      redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
+  end
+
 end
