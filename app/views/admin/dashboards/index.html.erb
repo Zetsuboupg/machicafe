@@ -33,6 +33,9 @@
     <p>User Name: <%= link_to review.user.name, user_path(review.user) %></p>
     <p>総合評価: <spsn id="cafe_rating_review_<%= review.id %>"></spsn></p>
     <p>レビュー内容: <%= review.comment %></p>
+    <% review.tags.each do |tag| %>
+     タグ: <%= tag.name %>
+    <% end %>
     <p>
       <%= link_to '削除', admin_review_path(review), method: :delete, data: { confirm: '本当に削除しますか？' } %>
     </p>

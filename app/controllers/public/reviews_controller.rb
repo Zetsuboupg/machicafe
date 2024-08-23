@@ -7,9 +7,10 @@ class Public::ReviewsController < ApplicationController
 
   def index
     if params[:tag_id].present?
-      @reviews = Tag.find(params[:tag_id]).reviews.order(created_at: :desc).limit(10)
+      @tag = Tag.find(params[:tag_id])
+      @reviews = @tag.reviews
     else
-      @reviews = Review.order(created_at: :desc).limit(10)
+      @reviews = Review.all
     end
   end
 

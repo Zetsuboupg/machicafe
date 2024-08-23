@@ -32,16 +32,17 @@
   </script>
 
 <p id="notice"><%= notice %></p>
-  <h1>Reviews</h1>
-  <%= form_tag cafe_reviews_path(@cafe), method: :get, class: 'boards__searchForm' do %>
-    <%= select_tag :tag_id,
-                   options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
-                   {
-                     prompt: 'タグで絞り込み検索',
-                     onchange: 'submit(this.form);'
-                   }
-    %>
-  <% end %>
+<h1>レビュー検索</h1>
+<%= form_with url: cafe_reviews_path(@cafe), method: :get, local: true, class: 'boards__searchForm' do %>
+  <%= select_tag :tag_id,
+                 options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+                 {
+                   prompt: 'タグで絞り込み検索',
+                   onchange: 'submit(this.form);'
+                 }
+  %>
+<% end %>
+
 
   <h2>レビュー一覧</h2>
   <% @cafe.reviews.each do |review| %>
