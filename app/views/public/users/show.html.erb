@@ -5,7 +5,11 @@
 
   <h1>ユーザー詳細</h1>
   <p>
-    Username: <%= @user.username %>
+    <% if @user.username.present? %>
+      Username: <%= @user.username %>
+    <% else %>
+      Username: guest
+    <% end %>
   </p>
   <p>
     Email: <%= @user.email %>

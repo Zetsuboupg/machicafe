@@ -1,4 +1,10 @@
-<h1>すべてのレビュー</h1>
+<h1>
+  <% if @tag.present? %>
+    タグ: <%= @tag.name %> に関連するレビュー
+  <% else %>
+    すべてのレビュー
+  <% end %>
+</h1>
 
 <ul>
   <% @reviews.each do |review| %>
@@ -12,7 +18,7 @@
       <!-- コメント一覧を表示 -->
       <ul>
         <% review.comments.each do |comment| %>
-          <li><%= comment.content %> - <%= comment.user.name %></li>
+          <li><%= comment.comment_content %> - <%= comment.user.name %></li>
         <% end %>
       </ul>
     </li>

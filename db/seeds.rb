@@ -7,3 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Cafe.create(name: "カフェA", description: "素敵なカフェ", address: "東京都...")
 Cafe.create(name: "カフェB", description: "落ち着いた雰囲気のカフェ", address: "大阪府...")
+Cafe.create(name: "カフェC", description: "わくわくなカフェ", address: "東京都...")
+
+Tag.create([
+    { name: '雰囲気がいい' },
+    { name: 'しゃべりやすい' },
+    { name: 'おしゃれ'},
+    { name: '個室'},
+    { name: 'にぎやか'},
+    { name: '落ち着いてる'}
+    ])

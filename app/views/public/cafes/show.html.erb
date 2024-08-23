@@ -3,63 +3,20 @@
     <%= link_to "マチカフェ", top_path, class: "brand-logo" %>
   </div>
 
+  <h1>カフェ詳細</h1>
+  <p>Name: <%= @cafe.name %></p>
+  <p>Address: <%= @cafe.address %></p>
+  <p>Description: <%= @cafe.description %></p>
+  <p>Category ID: <%= @cafe.category_id %></p>
+  <p><%= image_tag @cafe.image if @cafe.image.attached? %></p>
 
-<h1>カフェ詳細</h1>
-<p>
-  Name: <%= @cafe.name %>
-</p>
-<p>
-  Address: <%= @cafe.address %>
-</p>
-<p>
-  Description: <%= @cafe.description %>
-</p>
-<p>
-  Category ID: <%= @cafe.category_id %>
-</p>
-<p>
-  <%= image_tag @cafe.image if @cafe.image.attached? %>
-</p>
+  <%= link_to "戻る", cafes_path %>
 
-<%= link_to "戻る", cafes_path %>
-<!-- <= link_to 'Upload a New Photo', edit_cafe_path(@cafe) %> -->
-
-<h2>評価平均</h2>
-<div id="cafe_rating_review_avg"></div>
-<script>
-  $(document).on('turbolinks:load', function() {
-    let elem = document.querySelector('#cafe_rating_review_avg');
-    if (elem == null) return;
-
-    elem.innerHTML = ""
-    let opt = {
-      starOn: "<%= asset_path('star-on.png') %>",
-      starOff: "<%= asset_path('star-off.png') %>",
-      starHalf: "<%= asset_path('star-half.png') %>",
-      score: <%= @cafe.reviews.average(:rating) %>,
-      readOnly: true
-    };
-    raty(elem, opt);
-  });
-</script>
-
-
-
-<!-- app/views/cafes/show.html.erb -->
-<h1><%= @cafe.cafe_name %></h1>
-<p><%= @cafe.description %></p>
-
-
-
-<h2>レビュー一覧</h2>
-<% @cafe.reviews.each do |review| %>
-  <p>User Name: <%= link_to review.user.name, user_path(review.user) %></p>
-  <p>総合評価: <spsn id="cafe_rating_review_<%= review.id %>"></spsn></p>
-  <p>レビュー内容: <%= review.comment %></p>
-
+  <h2>評価平均</h2>
+  <div id="cafe_rating_review_avg"></div>
   <script>
     $(document).on('turbolinks:load', function() {
-      let elem = document.querySelector('#cafe_rating_review_<%= review.id %>');
+      let elem = document.querySelector('#cafe_rating_review_avg');
       if (elem == null) return;
 
       elem.innerHTML = ""
@@ -67,62 +24,111 @@
         starOn: "<%= asset_path('star-on.png') %>",
         starOff: "<%= asset_path('star-off.png') %>",
         starHalf: "<%= asset_path('star-half.png') %>",
-        score: <%= review.rating %>,
+        score: <%= @cafe.reviews.average(:rating) %>,
         readOnly: true
       };
       raty(elem, opt);
     });
   </script>
 
-  <h4>レビューへのコメント</h4>
-  <% review.comments.each do |comment| %>
-    <div>
-      <p><strong><%= comment.user.name %>:</strong> <%= comment.comment_content %></p>
+<p id="notice"><%= notice %></p>
+  <h1>Reviews</h1>
+  <%= form_tag cafe_reviews_path(@cafe), method: :get, class: 'boards__searchForm' do %>
+    <%= select_tag :tag_id,
+                   options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+                   {
+                     prompt: 'タグで絞り込み検索',
+                     onchange: 'submit(this.form);'
+                   }
+    %>
   <% end %>
-  <!-- コメント一覧 -->
 
+  <h2>レビュー一覧</h2>
+  <% @cafe.reviews.each do |review| %>
+    <p>User Name: <%= link_to review.user.name, user_path(review.user) %></p>
+    <p>総合評価: <span id="cafe_rating_review_<%= review.id %>"></span></p>
+    <p>レビュー内容: <%= review.comment %></p>
+    <% review.tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
 
-  <!-- コメントフォーム -->
-  <%= form_with(model: [review, review.comments.build], url: cafe_review_comments_path(@cafe, review), local: true) do |f| %>
+    <script>
+      $(document).on('turbolinks:load', function() {
+        let elem = document.querySelector('#cafe_rating_review_<%= review.id %>');
+        if (elem == null) return;
+
+        elem.innerHTML = ""
+        let opt = {
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          starHalf: "<%= asset_path('star-half.png') %>",
+          score: <%= review.rating %>,
+          readOnly: true
+        };
+        raty(elem, opt);
+      });
+    </script>
+
+    <h4>レビューへのコメント</h4>
+    <% review.comments.each do |comment| %>
+      <div>
+        <p><strong><%= comment.user.name %>:</strong> <%= comment.comment_content %></p>
+      </div>
+    <% end %>
+
+    <!-- コメントフォーム -->
+    <%= form_with(model: [review, review.comments.build], url: cafe_review_comments_path(@cafe, review), local: true) do |f| %>
+      <div>
+        <%= f.label :comment_content, "コメント" %>
+        <%= f.text_area :comment_content %>
+      </div>
+      <div>
+        <%= f.submit "コメントを投稿" %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <h2>新しいレビューを書く</h2>
+  <%= form_with(model: [ @cafe, @cafe.reviews.build ], local: true) do |f| %>
     <div>
-      <%= f.label :comment_content, "コメント" %>
-      <%= f.text_area :comment_content %>
+      <%= f.label :rating, "評価 (1-5)" %>
+      <div id="cafe_rating"></div>
     </div>
     <div>
-      <%= f.submit "コメントを投稿" %>
+      <%= f.label :comment, "レビュー内容" %>
+      <%= f.text_area :comment %>
+    </div>
+
+    <div class="check_box">
+      <span>タグ</span>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+       <div>
+         <%= tag.label do %>
+           <%= tag.check_box %>
+           <%= tag.text %>
+         <% end %>
+       </div>
+     <% end %>
+   </div>
+
+    <div>
+      <%= f.submit "レビューを投稿" %>
     </div>
   <% end %>
-<% end %>
 
+  <script>
+    $(document).on('turbolinks:load', function() {
+      let elem = document.querySelector('#cafe_rating');
+      if (elem == null) return;
 
-
-<h2>新しいレビューを書く</h2>
-<%= form_with(model: [ @cafe, @cafe.reviews.build ], local: true) do |f| %>
-  <div>
-    <%= f.label :rating, "評価 (1-5)" %>
-    <div id="cafe_rating"></div>
-  </div>
-  <div>
-    <%= f.label :comment, "レビュー内容" %>
-    <%= f.text_area :comment %>
-  </div>
-  <div>
-    <%= f.submit "レビューを投稿" %>
-  </div>
-<% end %>
-
-<script>
-  $(document).on('turbolinks:load', function() {
-    let elem = document.querySelector('#cafe_rating');
-    if (elem == null) return;
-
-    elem.innerHTML = ""
-    let opt = {
-      starOn: "<%= asset_path('star-on.png') %>",
-      starOff: "<%= asset_path('star-off.png') %>",
-      starHalf: "<%= asset_path('star-half.png') %>",
-      scoreName: 'review[rating]',
-    };
-    raty(elem, opt);
-  });
-</script>
+      elem.innerHTML = ""
+      let opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        scoreName: 'review[rating]',
+      };
+      raty(elem, opt);
+    });
+  </script>
+</div>

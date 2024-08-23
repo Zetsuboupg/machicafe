@@ -4,9 +4,13 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new
   end
 
+
   def index
-    #@reviews = Review.all
-    @reviews = Review.order(created_at: :desc).limit(10)
+    if params[:tag_id].present?
+      @reviews = Tag.find(params[:tag_id]).reviews.order(created_at: :desc).limit(10)
+    else
+      @reviews = Review.order(created_at: :desc).limit(10)
+    end
   end
 
   def show
@@ -33,7 +37,7 @@ class Public::ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :comment)
+    params.require(:review).permit(:rating, :comment, :title, tag_ids: [])
   end
 
 

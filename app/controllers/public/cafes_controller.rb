@@ -7,11 +7,13 @@ class Public::CafesController < ApplicationController
   def index
     @q = Cafe.ransack(params[:q])
     @cafes = @q.result
+
   end
 
   def show
     @cafe = Cafe.find(params[:id])
     @review = Review.new
+    @reviews = params[:tag_id].present? ? Tag.find(params[:tag_id]).reviews : Review.all
   end
 
   def edit
