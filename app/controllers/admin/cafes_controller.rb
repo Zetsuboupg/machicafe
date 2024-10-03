@@ -1,7 +1,8 @@
 class Admin::CafesController < ApplicationController
   before_action :set_cafe, only: [:show, :edit, :update, :destroy]
 
-  def show; end
+  def show;
+  end
 
   def edit
     # @cafeはbefore_actionで設定

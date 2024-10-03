@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     root to: 'homes#about'
     get 'about', to: 'homes#about'
     get 'top', to: 'homes#top'
+    get 'renai', to: 'renai#index'
 
     resources :users
     resources :cafes, only: [:index, :show] do
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
         resources :comments, only: [:create]
       end
     end
+
+    resources :renai, only: [:index, :create, :show]
     resources :categories
     resources :likes
   end
