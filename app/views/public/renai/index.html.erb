@@ -1,15 +1,19 @@
+<!-- app/views/public/renai/index.html.erb -->
+
 <h1>恋愛相談</h1>
 
-<%= form_with url: renai_path, method: :get, local: true do %>
+<%= form_with url: renai_index_path, method: :post do %>
   <div>
-    <%= text_area_tag :user_input, params[:user_input], placeholder: "恋愛相談を入力してください", rows: 5, cols: 50 %>
+    <%= text_area_tag :user_input, @user_input, placeholder: "恋愛相談を入力してください", rows: 5, cols: 50 %>
   </div>
   <div>
     <%= submit_tag "送信" %>
   </div>
 <% end %>
 
-<% if @result.present? %>
-  <h2>AIからの回答</h2>
-  <p><%= @result %></p>
-<% end %>
+<div id="result">
+  <% if @result.present? %>
+    <h2>AIからの回答</h2>
+    <p><%= @result %></p>
+  <% end %>
+</div>

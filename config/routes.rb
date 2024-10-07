@@ -16,7 +16,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :renai, only: [:index, :create, :show]
+    resources :renai, only: [:index] do
+      collection do
+        post :index
+      end
+    end
     resources :categories
     resources :likes
   end
