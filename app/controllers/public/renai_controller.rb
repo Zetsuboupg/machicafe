@@ -28,7 +28,7 @@ class Public::RenaiController < ApplicationController
               { role: "system", content: "You are a helpful assistant." },
               { role: "user", content: user_input }
             ],
-            max_tokens: 1000
+            max_tokens: 500
           }.to_json
 
           # APIへのリクエスト
@@ -41,18 +41,11 @@ class Public::RenaiController < ApplicationController
             @result = "接続失敗: #{response.code} #{response.message}"
           end
         rescue => e
-          @result = "接続失敗: #{e.message}"
+          @result = "エラーが発生しました: #{e.message}"
         end
       else
-        @result = nil
+        @result = "相談内容を入力してください。"
       end
-
-      respond_to do |format|
-        format.js   # index.js.erbをレンダリング
-        format.html # index.html.erbをレンダリング
-      end
-    else
-      # GETリクエスト時の処理（フォームの表示）
     end
   end
 end

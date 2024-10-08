@@ -1,0 +1,6 @@
+<% if @result.present? %>
+  <h2>AIからの回答</h2>
+  <p><%= sanitize(@result) %></p>
+<% else %>
+  <p>回答がありません。</p>
+<% end %>

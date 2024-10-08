@@ -2,7 +2,7 @@
 
 <h1>恋愛相談</h1>
 
-<%= form_with url: renai_index_path, method: :post do %>
+<%= form_with url: renai_index_path, method: :post, local: true do %>
   <div>
     <%= text_area_tag :user_input, @user_input, placeholder: "恋愛相談を入力してください", rows: 5, cols: 50 %>
   </div>
@@ -11,9 +11,7 @@
   </div>
 <% end %>
 
-<div id="result">
-  <% if @result.present? %>
-    <h2>AIからの回答</h2>
-    <p><%= @result %></p>
-  <% end %>
-</div>
+<% if @result.present? %>
+  <h2>AIからの回答</h2>
+  <p><%= simple_format(h(@result)) %></p>
+<% end %>
