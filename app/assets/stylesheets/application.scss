@@ -72,6 +72,31 @@
   color: #000;
 }
 
+.user-message {
+  text-align: right;
+  margin: 10px;
+}
+
+.ai-message {
+  text-align: left;
+  margin: 10px;
+}
+
+.user-message p, .ai-message p {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.user-message p {
+  background-color: #DCF8C6;
+}
+
+.ai-message p {
+  background-color: #F1F0F0;
+}
+
+
 .content {
   display: flex;
   margin-top: 20px;

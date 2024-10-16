@@ -6,7 +6,7 @@ require 'json'
 class Public::RenaiController < ApplicationController
   def index
     if request.post?
-      api_key = ENV['OPENAI_API_KEY']
+      api_key = Rails.application.credentials.openai[:api_key]
       user_input = params[:user_input]
       @user_input = user_input  # ビューで再表示するため
 

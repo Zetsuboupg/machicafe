@@ -1,2 +1,8 @@
 // 結果の表示部分を更新
 document.getElementById('result').innerHTML = "<%= j render 'result' %>";
+
+// チャット履歴を更新
+document.getElementById('chat_history').innerHTML = "<%= j render 'chat_history' %>";
+
+// テキストエリアをクリア
+document.querySelector("textarea[name='user_input']").value = '';

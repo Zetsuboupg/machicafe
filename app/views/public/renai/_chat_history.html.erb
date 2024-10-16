@@ -1,0 +1,11 @@
+<% @chat_history.each do |message| %>
+  <% if message[:role] == 'user' %>
+    <div class="user-message">
+      <p><strong>あなた:</strong> <%= h message[:content] %></p>
+    </div>
+  <% elsif message[:role] == 'assistant' %>
+    <div class="ai-message">
+      <p><strong>AI:</strong> <%= simple_format(h(message[:content])) %></p>
+    </div>
+  <% end %>
+<% end %>
