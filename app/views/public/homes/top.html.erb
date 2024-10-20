@@ -30,17 +30,36 @@
     </div>
     <div class="right-column">
       <h1>新着レビュー</h1>
-      <ul>
-        <% @reviews.each do |review| %>
-            <strong><%= link_to review.cafe.name, cafe_path(review.cafe) %></strong><br>
-            <p><strong>User Name: <%= review.user.name %></strong></p>
-            <p>評価: <%= review.rating %></p>
-            <p>コメント: <%= review.comment %></p>
+        <ul>
+          <% @reviews.each do |review| %>
+            <li>
+              <strong><%= link_to review.cafe.name, cafe_path(review.cafe) %></strong><br>
+              <p><strong>User Name: <%= review.user.name %></strong></p>
+              <p>評価: <span id="review_rating_<%= review.id %>"></span></p>
+              <p>コメント: <%= review.comment %></p>
+              <p>投稿時間: <%= review.created_at.strftime('%Y年%m月%d日 %H:%M') %></p>
+            </li>
 
-        <% end %>
+            <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#review_rating_<%= review.id %>');
+                if (elem == null) return;
+
+                elem.innerHTML = ""
+                let opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  score: <%= review.rating %>,
+                  readOnly: true
+                };
+                raty(elem, opt);
+              });
+            </script>
+          <% end %>
+        </ul>
 
       <!-- ランキングリストをここに追加 -->
     </div>
   </div>
 </div>
-
