@@ -9,6 +9,8 @@
   <p>Description: <%= @cafe.description %></p>
   <p>Category ID: <%= @cafe.category_id %></p>
   <p><%= image_tag @cafe.image if @cafe.image.attached? %></p>
+  <div id="map" style="height: 500px; width: 100%;"></div>
+
 
   <%= link_to "戻る", cafes_path %>
 
@@ -130,6 +132,27 @@
         scoreName: 'review[rating]',
       };
       raty(elem, opt);
+    });
+  </script>
+
+    <!-- 地図の初期化コード -->
+  <script>
+    document.addEventListener('turbolinks:load', function() {
+      // 東京駅の座標
+      var tokyoStation = { lat: 35.681236, lng: 139.767125 };
+
+      // 地図を表示
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: tokyoStation,
+        zoom: 15
+      });
+
+      // マーカーを設置
+      var marker = new google.maps.Marker({
+        position: tokyoStation,
+        map: map,
+        title: '<%= @cafe.name %>'
+      });
     });
   </script>
 </div>

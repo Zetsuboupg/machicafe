@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_23_051247) do
+ActiveRecord::Schema.define(version: 2024_10_28_012831) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,13 +52,7 @@ ActiveRecord::Schema.define(version: 2024_08_23_051247) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "category_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "caves", force: :cascade do |t|
+  create_table "cafes", force: :cascade do |t|
     t.string "cafe_name"
     t.string "address"
     t.text "description"
@@ -66,6 +60,14 @@ ActiveRecord::Schema.define(version: 2024_08_23_051247) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+    t.float "latitude"
+    t.float "longitude"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "category_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -95,12 +97,10 @@ ActiveRecord::Schema.define(version: 2024_08_23_051247) do
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id"
     t.integer "cafe_id"
-    t.float "comfort_rating"
-    t.float "talk_rating"
-    t.float "ambiance_rating"
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "content"
     t.integer "rating"
   end
 
@@ -108,8 +108,6 @@ ActiveRecord::Schema.define(version: 2024_08_23_051247) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "taggings_count", default: 0
-    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
